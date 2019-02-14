@@ -61,11 +61,11 @@ class MyPowerListTestCases(unittest.TestCase):
         searched_record = d.searchForRecord(UserDataType.ADDRESS, "Calle 123")
         self.assertDictEqual(address_record, searched_record)
 
-        # find by name
+        # find by phone
         searched_record = d.searchForRecord(UserDataType.PHONE, "134679")
         self.assertDictEqual(phone_record, searched_record)
 
-        # find by name
+        # find by mail
         searched_record = d.searchForRecord(UserDataType.MAIL, "perla@facebook.com")
         self.assertDictEqual(mail_record, searched_record)
 
