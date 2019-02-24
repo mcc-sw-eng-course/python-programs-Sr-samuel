@@ -1,0 +1,3 @@
+ ,Merge Sort,Heap Sort,Quick Sort
+NumberOfRecordsSorted,10,10,10
+TimeConsumed,0.1729 ms,0.2334 ms,0.1380 ms
