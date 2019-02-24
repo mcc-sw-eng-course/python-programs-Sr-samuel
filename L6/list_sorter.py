@@ -14,6 +14,7 @@ import csv
 import os
 from pathlib import Path
 from enum import Enum
+import time
 from sort_algorithms import mergeSort, quickSort, heapSort
 
 def is_float(value: str) -> bool:
@@ -35,10 +36,27 @@ class StatusCode(Enum):
     LIST_IS_EMPTY = 6
     LIST_ALREADY_SORTED = 7
 
+class PerformanceData():
+    def __init__(self):
+        self.NumberOfRecordsSorted = 0
+        self.TimeConsumed = 0
+        self.StartTime = 0
+        self.EndTime = 0
+
+    def start_performance_measurement(self, NumberOfRecords: int):
+        self.NumberOfRecordsSorted = NumberOfRecords
+        self.StartTime = time.time()
+
+    def end_performance_measurement(self):
+        self.EndTime = time.time()
+        self.TimeConsumed = "{0:.4f} ms".format((self.EndTime - self.StartTime)*1000)
+
+
 class ListSorter():
     def __init__(self):
         self.working_list = ()
         self.already_sorted = False
+        self.performance_data = PerformanceData()
 
     def set_input_data(self, file_path_name: str) -> StatusCode:
         """ Tries to open the file with the given file_path_name and read the values to a list
@@ -99,7 +117,9 @@ class ListSorter():
         status_code = StatusCode.FAILURE
         if len(self.working_list) > 0:
             if self.already_sorted == False:
+                self.performance_data.start_performance_measurement(len(self.working_list))
                 mergeSort(self.working_list)
+                self.performance_data.end_performance_measurement()
                 self.already_sorted = True
                 status_code = StatusCode.SUCCESS
             else:
@@ -111,7 +131,9 @@ class ListSorter():
     def execute_heap_sort(self):
         if len(self.working_list) > 0:
             if self.already_sorted == False:
+                self.performance_data.start_performance_measurement(len(self.working_list))
                 heapSort(self.working_list)
+                self.performance_data.end_performance_measurement()
                 self.already_sorted = True
                 status_code = StatusCode.SUCCESS
             else:
@@ -123,7 +145,9 @@ class ListSorter():
     def execute_quick_sort(self):
         if len(self.working_list) > 0:
             if self.already_sorted == False:
+                self.performance_data.start_performance_measurement(len(self.working_list))
                 quickSort(self.working_list)
+                self.performance_data.end_performance_measurement()
                 self.already_sorted = True
                 status_code = StatusCode.SUCCESS
             else:
@@ -132,5 +156,5 @@ class ListSorter():
             status_code = StatusCode.LIST_IS_EMPTY
         return status_code
 
-    def get_performance_data(self):
-        pass
+    def get_performance_data(self) -> PerformanceData:
+        return self.performance_data

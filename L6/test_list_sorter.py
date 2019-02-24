@@ -128,7 +128,7 @@ class ListSorter_test(unittest.TestCase):
         ls = ListSorter()
         in_filename = "MergeSort.csv"
         out_filename = "SortedMergeSort.csv"
-        self.create_csvfile_random_content(in_filename, 5)
+        self.create_csvfile_random_content(in_filename, 50000)
         self.assertEqual(StatusCode.SUCCESS, ls.set_input_data(in_filename))
         self.assertEqual(StatusCode.SUCCESS, ls.execute_merge_sort())
         self.assertEqual(StatusCode.SUCCESS, ls.set_output_data(out_filename))
@@ -156,7 +156,7 @@ class ListSorter_test(unittest.TestCase):
         ls = ListSorter()
         in_filename = "HeapSortData.csv"
         out_filename = "SortedByHeapSort.csv"
-        self.create_csvfile_random_content(in_filename, 5)
+        self.create_csvfile_random_content(in_filename, 50000)
         self.assertEqual(StatusCode.SUCCESS, ls.set_input_data(in_filename))
         self.assertEqual(StatusCode.SUCCESS, ls.execute_heap_sort())
         self.assertEqual(StatusCode.SUCCESS, ls.set_output_data(out_filename))
@@ -184,7 +184,7 @@ class ListSorter_test(unittest.TestCase):
         ls = ListSorter()
         in_filename = "QuickSortData.csv"
         out_filename = "SortedByQuickSort.csv"
-        self.create_csvfile_random_content(in_filename, 5)
+        self.create_csvfile_random_content(in_filename, 50000)
         self.assertEqual(StatusCode.SUCCESS, ls.set_input_data(in_filename))
         self.assertEqual(StatusCode.SUCCESS, ls.execute_quick_sort())
         self.assertEqual(StatusCode.SUCCESS, ls.set_output_data(out_filename))

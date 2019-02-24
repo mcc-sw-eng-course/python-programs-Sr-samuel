@@ -1,6 +1,8 @@
 """ Implementation of Merge Sort, Quick Sort and Heap Sort
 Merge Sort implementation taken from: 
 http://interactivepython.org/courselib/static/pythonds/SortSearch/TheMergeSort.html
+Heap Sort implementation taken from:
+https://www.programiz.com/dsa/heap-sort
 Quick Sort Implementation taken from:
 http://interactivepython.org/courselib/static/pythonds/SortSearch/TheQuickSort.html
 """
@@ -67,7 +69,6 @@ def heapSort(arr):
         
         #heapify root element
         heapify(arr, i, 0)
-
 
 def quickSort(alist):
    quickSortHelper(alist,0,len(alist)-1)
