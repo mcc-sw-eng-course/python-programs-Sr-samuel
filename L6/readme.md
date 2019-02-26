@@ -54,6 +54,15 @@ Implement the method:
 ```
 This method returns the performance data associated to the last sorting execution[Number of Records Sorted, TimeConsumed, StartTime, EndTime]
 
+Coverage Data
+----
+| Name              | Stmts| Miss|Branch|BrPart| Cover|
+|-------------------|------|-----|------|------|------|
+|list_sorter.py     |   103|    0|    24|     0|  100%|
+|sort_algorithms.py |    69|    0|    30|     0|  100%|
+|test_list_sorter.py|   182|    0|     8|     3|   98%|
+|TOTAL              |   354|    0|    62|     3|   99%|
+
 Performance Data
 -----
 

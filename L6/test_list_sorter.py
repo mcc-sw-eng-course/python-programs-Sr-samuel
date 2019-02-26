@@ -7,12 +7,11 @@ Materia: Analysis, Design, and Construction of Software Systems
 Development Exercises - L6 (Unit Tests)
 Unit tests for the ListSorter class
 """
-import sys
-sys.path.append('/L6')
+import csv
 import os
 import unittest
 import random
-from list_sorter import *
+from list_sorter import ListSorter, PerformanceData, StatusCode, is_float
 
 class ListSorter_test(unittest.TestCase):
     def setUp(self):
@@ -134,7 +133,7 @@ class ListSorter_test(unittest.TestCase):
         self.assertEqual(StatusCode.SUCCESS, ls.set_output_data(out_filename))
         self.delete_file(in_filename)
         self.delete_file(out_filename)
-    
+
     def test_listsorter_MergeSortAlreadySorted(self):
         ls = ListSorter()
         in_filename = "MergeSort.csv"
@@ -206,6 +205,57 @@ class ListSorter_test(unittest.TestCase):
     def test_listsorter_QuickSortEmptyList(self):
         ls = ListSorter()
         self.assertEqual(StatusCode.LIST_IS_EMPTY, ls.execute_quick_sort())
+
+    # Compares the list of each algorithm against each other
+    def test_listsorter_MergeSortVSQuickSort(self):
+        MergeSort = ListSorter()
+        QuickSort = ListSorter()
+        in_filename = "InputData.csv"
+        self.create_csvfile_random_content(in_filename, 5000)
+        # Read Input File to respective Sort
+        self.assertEqual(StatusCode.SUCCESS, MergeSort.set_input_data(in_filename))
+        self.assertEqual(StatusCode.SUCCESS, QuickSort.set_input_data(in_filename))
+        #Execute Sorts
+        MergeSort.execute_merge_sort()
+        QuickSort.execute_quick_sort()
+        #Compare Lists
+        self.assertListEqual(MergeSort.working_list, QuickSort.working_list)
+        self.delete_file(in_filename)
+
+    def test_listsorter_MergeSortVSHeapSort(self):
+        MergeSort = ListSorter()
+        HeapSort = ListSorter()
+        in_filename = "InputData.csv"
+        self.create_csvfile_random_content(in_filename, 5000)
+        # Read Input File to respective Sort
+        self.assertEqual(StatusCode.SUCCESS, MergeSort.set_input_data(in_filename))
+        self.assertEqual(StatusCode.SUCCESS, HeapSort.set_input_data(in_filename))
+        #Execute Sorts
+        MergeSort.execute_merge_sort()
+        HeapSort.execute_quick_sort()
+        #Compare Lists
+        self.assertListEqual(MergeSort.working_list, HeapSort.working_list)
+        self.delete_file(in_filename)
+
+    def test_listsorter_QuickSortVSHeapSort(self):
+        QuickSort = ListSorter()
+        HeapSort = ListSorter()
+        in_filename = "InputData.csv"
+        self.create_csvfile_random_content(in_filename, 5000)
+        # Read Input File to respective Sort
+        self.assertEqual(StatusCode.SUCCESS, QuickSort.set_input_data(in_filename))
+        self.assertEqual(StatusCode.SUCCESS, HeapSort.set_input_data(in_filename))
+        #Execute Sorts
+        QuickSort.execute_merge_sort()
+        HeapSort.execute_quick_sort()
+        #Compare Lists
+        self.assertListEqual(QuickSort.working_list, HeapSort.working_list)
+        self.delete_file(in_filename)
+
+    # Performance data
+    def test_listsorter_PerformanceData(self):
+        ls = ListSorter()
+        ls.get_performance_data()
 
 if __name__ == '__main__':
     unittest.main()
