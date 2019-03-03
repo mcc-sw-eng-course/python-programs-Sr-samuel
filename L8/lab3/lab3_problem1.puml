@@ -1,0 +1,92 @@
+@startuml
+
+title: Lab 3 - Problem 1. Samuel Solorzano (A00354798)
+
+class Student {
+    - name: str
+    - tax_file_number: int {unique}
+    - id: int {unique}
+    - birthdate: date
+    - sex: Sex
+    - year_of_study: YearOfStudy
+    - department: Department
+    - current_address: Address
+    - permanent_address: Address
+    + getGradeReport(Student): GradeReport
+}
+
+class Address {
+    - address: str
+    - phone: str
+    - zip: int
+}
+
+class Department {
+    - name: str {unique}
+    - code: str {unique}
+    - office_number: int
+    - office_phone: str
+    - faculty: str
+}
+
+class Course{
+    - name: str {unique}
+    - description: str
+    - number: int
+    - number_of_semesters_hours: int
+    - level: int
+    - offering_department: Department
+}
+
+class Section {
+    - instructor: Instructor
+    - semester: int
+    - year: int
+    - course: Course
+    - section_number: int
+}
+
+class Instructor{
+    - name: str
+}
+
+class GradeReport{
+    - student: Student
+    - section: Section
+    - letter_grade: LetterGrades
+    - percentage_mark: int [0..100]
+}
+
+enum LetterGrades{
+    HD
+    D
+    C
+    P
+}
+
+enum YearOfStudy {
+    First
+    Second
+    Third
+    PostGraduate
+}
+
+enum Sex {
+    MALE
+    FEMALE
+}
+
+'relationships
+
+Student "1" -down- "2" Address: has >
+Student "1" -down- "1" Department: Belongs >
+
+Department "1" -down- "0..*" Course: Offers >
+
+Section "1"  -down- "1" Instructor: imparted by >
+Course "1" -- "1..*"Section : has <
+
+Student "1" -- "0..*"GradeReport: obtains >
+GradeReport "1" -- "1" Section: has >
+
+@enduml
