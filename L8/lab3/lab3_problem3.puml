@@ -1,0 +1,41 @@
+@startuml
+
+title: Lab 3 - Problem 3. Samuel Solorzano (A00354798)
+
+actor Employee
+participant App <<UI>>
+participant System
+database Users
+
+activate Employee
+Employee -> App: CreateLetter(data)
+App -> App: Display "NewLetterScreen()"
+App -> System: Transfer(data)
+System -> Users: Exists(data.User)
+deactivate Employee
+alt New User
+    Users --> System: InvalidUser()
+    System --> App: CreateNewUser()
+    App -> App: Display "NewUserScreen()"
+    activate Employee
+    Employee -> App: Completes User Information
+    App -> System: Transfer(UserData)
+    System -> Users: AddUser(UserData)
+end
+Users --> System: ValidUser
+System --> App: valid
+deactivate Employee
+App -> App: Display "WriteLetterScreen()"
+activate Employee
+Employee -> App: Save Letter
+App -> App: Display "PrintLetterScreen()"
+alt Print Letter
+    App -> System: Print(LetterData)
+    System -> System: RenderLetter()
+    System -> System: doSendLetterToPrinter()
+else
+    hnote over App : idle
+end
+deactivate Employee
+
+@enduml

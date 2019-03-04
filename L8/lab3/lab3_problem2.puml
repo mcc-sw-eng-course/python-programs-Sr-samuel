@@ -1,0 +1,45 @@
+@startuml
+
+title: Lab 3 - Problem 2. Samuel Solorzano (A00354798)
+
+class Letter{
+    - body: str
+    - customer_data: Customer
+    - date: date
+    - author: Correspondent
+    + getWeekDate(date)
+}
+
+class Customer {
+    - name: str
+    - number: int
+    - address: Address
+}
+
+class Correspondents{
+    - name: str
+}
+
+abstract class Address {
+    - street_name: str
+    - street_number: int
+    - additional_info: str {optional}
+}
+
+class GermanAddress{
+    - postleitzah: int
+}
+
+class IntAddress{
+    - city_name: str
+    - zip: int {optional}
+    - country: str
+}
+
+Letter "0..1" -- "1" Customer
+Letter "0..1" -- "1" Correspondents
+Address "1" -- "1" Customer
+Address <|-- GermanAddress
+Address <|-- IntAddress
+
+@enduml
