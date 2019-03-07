@@ -7,11 +7,11 @@ title Lab 3 - Problem 4. Samuel Solorzano (A00354798)
 state "Console" as Console {
     [*] --> EnterCode: InitalState
     state EnterCode
-    EnterCode: [0..9, *, #]
     state CheckCode
     state ValidCode
     state InvalidCode
     state SoundAlarm
+    EnterCode --> EnterCode: [0..9, *, #]
     EnterCode --> CheckCode: InputReady
     CheckCode --> ValidCode: Valid Code / openDoor
     CheckCode --> InvalidCode: Invalid Code
@@ -28,7 +28,7 @@ state "Door" as Door {
     state Opening
     state Closing
     state Blocked
-    Closed --> Opening: openDoor
+    Closed --> Opening: Manual Open
     Opening --> Open: fullyOpen
     Open --> Closing: Time <= 30 sec
     Closing --> Closed: fullyClosed
