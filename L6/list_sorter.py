@@ -158,3 +158,75 @@ class ListSorter():
 
     def get_performance_data(self) -> PerformanceData:
         return self.performance_data
+
+
+# def rows(f, chunksize=1024):
+    """
+    Read a file where the row separator is ',' lazily.
+
+    Usage:
+
+    >>> with open('big.csv') as f:
+    >>>     for r in rows(f):
+    >>>         process(row)
+    """
+    """
+    incomplete_row = None
+    while True:
+        chunk = f.read(chunksize)
+        if not chunk: # End of file
+            if incomplete_row is not None:
+                yield incomplete_row
+                break
+        # Split the chunk as long as possible
+        while True:
+            i = chunk.find(',')
+            if i == -1:
+                break
+                
+            # If there is an incomplete row waiting to be yielded,
+            # prepend it and set it back to None
+            if incomplete_row is not None:
+                yield incomplete_row + chunk[:i]
+                incomplete_row = None
+            else:
+                yield chunk[:i]
+            chunk = chunk[i+1:]
+        # If the chunk contained no separator, it needs to be appended to
+        # the current incomplete row.
+        if incomplete_row is not None:
+            incomplete_row += chunk
+        else:
+            incomplete_row = chunk
+
+in_files = [
+    "L6/test_files/01_TenRecords.csv",
+    "L6/test_files/02_HundredRecords.csv",
+    "L6/test_files/03_ThousandRecords.csv",
+    "L6/test_files/04_FiftyThousandRecords.csv",
+    "L6/test_files/05_FiveHundredThousandRecords.csv",
+    "L6/test_files/06_OneMillion.csv",
+    "L6/test_files/07_TenMillion.csv",
+    "L6/test_files/08_FiftyMillion.csv"
+]
+
+filename = "../L6/test_files/06_OneMillion.csv"
+
+def test():
+    a = []
+    start = time.time()
+    with open(filename) as f:
+         for r in rows(f):
+            a.append(float(r))
+            pass
+    end = time.time()
+    read_time = end-start
+    print("Read file to Memory: {0:.4f} ms".format((end - start)*1000))
+    start = time.time()
+    quickSort(a)
+    end = time.time()
+    sort_time = end-start
+    print("Sort: Len({0}): {1:.4f} ms".format(len(a),  (end - start)*1000))
+    print("Total Time: Len({0}): {1:.4f} ms".format(len(a),  (sort_time + read_time)*1000))
+
+"""
