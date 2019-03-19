@@ -1,0 +1,69 @@
+@startuml
+
+title Tic Tac Toe Class Design
+
+interface IBoard {
+    +Board: List
+    +Player_Selection: str
+    +Ai_Selection: str
+    +AI: IBrain
+
+    +IBoard(selection: str)
+    +draw_board(): void
+    +player_won(): bool
+    +ai_won(): bool
+    +tied(): bool
+    +get_winning_moves(selection :str): list
+    +return_valid_moves(): list
+    +is_move_valid(move: int): bool
+    +do_player_move(move: int): void
+    +do_ai_move(): void
+}
+
+interface IBrain {
+    +Player_Selecion: str
+    +AI_Selection: str
+
+    +IBrain(selection: str)
+    +BestMove(board: list)
+    -Evaluate(board: list): int
+    -MovesLeft(board: list): bool
+    -Minmax(board: list, depth: int, isMax: bool, alpha: int, beta: int): int
+}
+
+class tictactoe_board
+class tictactoe_ai
+
+class tictactoe_gui{
+    -gui: Tkinter
+    -message_label: Label
+    -buttons: Button[]
+    -reset_button: Button
+    -board: tictactoe_board
+    +mainloop(): void
+    -select_turn(): void
+    -reset_handler(): void
+    -perform_move(x: int, y: int): void
+    -repaint_gui(): void
+    -paint_winning_moves(moves: list, color: str): void
+}
+
+class tictactoe_text{
+    -board: tictactoe_board
+    -player_wants_to_play: bool
+    -playing: bool
+    -turn: str
+    +get_player_selection(): str
+    +get_random_turn(): str
+    +main(): void
+}
+
+tictactoe_gui "1" -up- "1" tictactoe_board: implements  >
+tictactoe_text "1" -up- "1" tictactoe_board: implements >
+
+IBoard "1" *-right- "1" IBrain
+
+IBoard <|-- tictactoe_board
+IBrain <|-- tictactoe_ai
+
+@enduml

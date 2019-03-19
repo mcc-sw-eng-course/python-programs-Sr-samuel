@@ -1,0 +1,43 @@
+@startuml
+
+start
+
+:Get Player Selection;
+
+:Get First Turn;
+
+while (wants_to_play) is (Yes)
+    while (playing?) is (Yes)
+        if(Player goes first) then (Yes)
+            :Draw Board;
+            :Get Player Move;
+            if (Player Won) then (Yes)
+                :Draw Board;
+                :Print You Won;
+                :Playing = No;
+            endif
+            :turn = AI;
+
+        else (No) 
+            :Do AI Move;
+            if (AI Won) then (Yes)
+                :Draw Board;
+                :Print AI Won;
+                :Playing = No;
+            :turn = player;
+            endif
+        endif
+        if (Game Tied) then (Yes)
+            :Draw Board;
+            :Print Game is Tied;
+            :Playing = No;
+        endif
+    endwhile (No)
+    if (Play Again) then (no)
+        :wants_to_play = No;
+    endif
+endwhile(no)
+
+stop
+
+@enduml

@@ -85,7 +85,7 @@ class GUI:
 
     def move(self, x, y):
         # convert the move from 2D to a 1D array as we need it
-        move = (y * self.size + x) + 1 # we  ignore the 0, we add 1
+        move = (y * self.size + x) + 1  # we  ignore the 0 position, we add 1
         self.gui.config(cursor="watch") # make the cursos showing that we are thinking...
         self.gui.update()               # update the gui
         self.board.do_player_move(move) # Update the board with the players move
@@ -105,7 +105,7 @@ class GUI:
         # iterate on all empty spaces
         for i, space in enumerate(iterboard):
             self.buttons[i]['text'] = space                 # Update the text of the button can be empty, X or O
-            self.buttons[i]['disabledforeground'] = 'white' # change the color to white
+            self.buttons[i]['disabledforeground'] = 'gray'  # change the color to white
             if space == ' ':
                 self.buttons[i]['state'] = 'normal'         # make the button clickable when its empty
             else:
@@ -128,7 +128,7 @@ class GUI:
         elif self.board.tied():
             self.message['text'] = "Game is tied"
             for button in self.buttons:
-                button['disabledforeground'] = 'gray'
+                button['disabledforeground'] = 'black'
         else:
             pass
 
