@@ -24,3 +24,20 @@ Teacher: Dr. Gerardo Padilla
 |test_tictactoe_board.py|    89|    4|     2|     1|   95%|
 |test_tictactoe_ai.py   |    74|    0|     2|     1|   99%|
 |TOTAL                  |   330|   12|   102|    12|   94%|
+
+Files:
+
+- tictactoe_board.py
+  - Board Class, handle all the logic for the Tic Tac Toe Game
+- tictactoe_ai.py
+  - AI for the Tic Tac Toe AI player, selects the Best Move based on the Min Max Algorithm optimized with AB Pruning.
+- tictactoe_text.py
+  - Text Interface for the Tic Tac Toe, uses the board class.
+- tictactoe_gui.py
+  - GUI Interface for the Tic Tac Toe game, uses the board class.
+- test_tictactoe_board.py
+  - Unit testing for the Board class
+- test_tictactoe_ai.py
+  - Unit testing for the AI class.
+
+![Tic Tac Toe Class](tictactoe_class_diagram.png "Tic Tac Toe Class")
