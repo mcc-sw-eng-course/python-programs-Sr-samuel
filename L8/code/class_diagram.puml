@@ -7,6 +7,7 @@ interface IBoard {
     +Player_Selection: str
     +Ai_Selection: str
     +AI: IBrain
+    +size: int
 
     +IBoard(selection: str)
     +draw_board(): void
@@ -58,8 +59,8 @@ class tictactoe_text{
     +main(): void
 }
 
-tictactoe_gui "1" -up- "1" tictactoe_board: implements  >
-tictactoe_text "1" -up- "1" tictactoe_board: implements >
+tictactoe_gui "1" -down- "1" IBoard: implements  >
+tictactoe_text "1" -down- "1" IBoard: implements >
 
 IBoard "1" *-right- "1" IBrain
 
