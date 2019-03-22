@@ -27,6 +27,8 @@ Teacher: Dr. Gerardo Padilla
 
 Files:
 
+- random_tictactoe.py
+  - Tic Tac Toe pair programmed with Alex Garcia A00354776 Bruno Vergaray A01223463
 - tictactoe_board.py
   - Board Class, handle all the logic for the Tic Tac Toe Game
 - tictactoe_ai.py
@@ -39,5 +41,9 @@ Files:
   - Unit testing for the Board class
 - test_tictactoe_ai.py
   - Unit testing for the AI class.
+
+The implementation was done like this to separate the Logic of the Game, The AI code and the Representation of the code.
+
+Currently it was not implemented as an Interface as designed in the class diagram, but that implementation add flexibility to add the checker code with less effort.
 
 ![Tic Tac Toe Class](tictactoe_class_diagram.png "Tic Tac Toe Class")
