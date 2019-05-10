@@ -1,0 +1,61 @@
+@startuml
+
+title Relationships - Class Diagram
+
+
+interface IGame {
+    - board: IBoard
+    - m_player1: IPlayer
+    - m_player2: IPlayer
+    - m_playing: True
+    - m_current_turn: int
+    + select_first_turn(self) -> None:
+    + new_game(self) -> None:
+    + render(self) -> None:
+    + mainloop(self) -> None:
+}
+
+interface IBoard {
+    - size: int
+    - players: list
+    + render(self):
+    + player_one_won(self) -> bool:
+    + player_two_won(self) -> bool:
+    + game_tied(self) -> bool:
+    + get_valid_moves(self) -> list:
+    + is_move_valid(self) -> bool:
+    + do_player_one_move(self) -> bool:
+    + do_player_two_move(self) -> bool:
+}
+
+class Game_CLI
+class Game_GUI
+
+class TicTacToe_Board
+class Checkers_Board
+interface Player
+class Human_Player
+interface AI_Player
+class TicTacToe_AI
+class Checkers_AI
+
+IGame "1" *-left- "1" IBoard
+IGame "1" *-right- "2" Player
+
+IGame <|-down- Game_GUI
+IGame <|-down- Game_CLI
+
+IBoard <|-down- TicTacToe_Board
+IBoard <|-down- Checkers_Board
+
+
+
+Player <|-down- Human_Player
+Player <|-down- AI_Player
+
+AI_Player <|-down- TicTacToe_AI
+AI_Player <|-down- Checkers_AI
+
+
+
+@enduml
